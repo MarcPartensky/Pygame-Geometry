@@ -1,0 +1,5 @@
+build
+dist
+.idea
+__pycache__
+pygame_geometry.egg-info
