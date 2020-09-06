@@ -12,7 +12,7 @@ import math
 import copy
 
 
-from tools import timer
+from .tools import timer
 #Point = namedtuple('Point', ['x', 'y'])
 
 
