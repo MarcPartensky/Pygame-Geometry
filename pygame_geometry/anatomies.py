@@ -1,9 +1,9 @@
-from .abstract import Point, Segment, Form, Circle, Vector, Line
+from .abstract import Point, Segment, Form, Circle, Vector, Line, Form
 from .curves import Trajectory
 
 import random
 
-
+Polygon = Form
 # Interface Anatomy
 # - show(context)   //an anatomy must be responsible for drawing itself
 # - __str__()           //an anatomy must be able to give a string representation
@@ -28,24 +28,35 @@ class Anatomy:
     # @classmethod
     # def random(cls, *args, **kwargs):
     #     raise NotImplementedError("This method must be overloaded.")
-    #
+    
     # def __init__(self, *args, **kwargs):
     #     raise NotImplementedError("This method must be overloaded.")
-    #
+    
     # def update(self, *args, **kwargs):
     #     raise NotImplementedError("This method must be overloaded.")
-    #
+    
     # def show(self, *args, **kwargs):
     #     raise NotImplementedError("This method must be overloaded.")
-    #
+    
     # def rotate(self, *args, **kwargs):
     #     raise NotImplementedError("This method must be overloaded.")
-    #
+    
     # def cross(self, other, **kwargs):
     #     raise NotImplementedError("This method must be overloaded.")
-    #
+    
     # def collide(self, other):
     #     raise NotImplementedError("This method must be overloaded.")
+
+class PolygonAnatomy(Anatomy):
+
+    @classmethod
+    def random(cls, *args, **kwargs):
+        """Return a random polygon anatomy."""
+        return cls(Polygon.random(*args, **kwargs))
+
+    def __init__(self, polygon:Polygon):
+        """Create a polygon anatomy with a polygon."""
+        self.polygon = polygon
 
 
 class PointsAnatomy(Anatomy):

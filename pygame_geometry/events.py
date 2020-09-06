@@ -28,16 +28,27 @@ class Event:
         self.type = type
         self.__dict__.update(value)
 
+    def __str__(self): # Only for key events.
+        def get_event_name(event):
+            for k,v in pygame.__dict__.items():
+                if v==event:
+                    return k
+        type_ = get_event_name(self.type)
+        key = get_event_name(self.key)
+        return f"{type_}|{key}"
+
 class Manager:
     """Base class of any simulation or game."""
-    on:bool = True
-    controls:list = []
 
-    def __init__(self, context:Context):
+    def __init__(self,
+        context:context.Context,
+        controls:list=[],
+        on:bool=True
+    ):
         """Create a manager class."""
         self.context = context
-        self.controls = Manager.controls
-        self.on = Manager.on
+        self.controls = controls
+        self.on = on
 
     def add_controls(self):
         """Add the controls to the manager."""
@@ -77,6 +88,7 @@ class Manager:
         """Show the manager window."""
         self.context.flip()
         self.context.clear()
+        self.context.console.show()
 
     def update(self):
         """Update the manager state."""
@@ -98,6 +110,21 @@ class Control:
     def __call__(self, *args, **kwargs):
         """Call the action function."""
         return self.action(*args, **kwargs)
+
+    @property
+    def name(self):
+        return self.action.__name__
+
+    def help(self):
+        """help message for the control."""
+        return self.action.__doc__
+
+    def __str__(self):
+        """String representation of the control."""
+        return f"{self.event} => {self.name}: {self.help()}"
+
+
+
 
 on = Controller()
 

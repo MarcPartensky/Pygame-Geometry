@@ -2356,7 +2356,10 @@ class Circle:
         if not border_color: border_color = self.border_color
         if not area_color: area_color = self.area_color
         if not fill: fill = self.fill
-        window.draw.circle(window.screen, border_color, self.position, self.radius, fill)
+        if fill:
+            window.draw.circle(window.screen, area_color, self.position, self.radius, True)
+        window.draw.circle(window.screen, border_color, self.position, self.radius, False)
+
 
     def showCenter(self, window, color=None, mode=None):
         """Show the center of the screen."""

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pygame_geometry",
-    version="0.1.0",
+    version="0.1.2",
     author="Mazex",
     author_email="marc.partensky@gmail.com",
     description="Geometry environment for pygame.",
